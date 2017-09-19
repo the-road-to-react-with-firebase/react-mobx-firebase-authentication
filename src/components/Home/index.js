@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { compose } from 'recompose';
 
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
@@ -9,27 +11,23 @@ const fromObjectToList = (object) =>
     : [];
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: []
-    };
-  }
-
   componentDidMount() {
+    const { userStore } = this.props;
+
     db.onceGetUsers().then(snapshot =>
-      this.setState(() => ({ users: fromObjectToList(snapshot.val()) }))
+      userStore.setUsers(fromObjectToList(snapshot.val()))
     );
   }
 
   render() {
+    const { users } = this.props.userStore;
+
     return (
       <div>
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
 
-        { !!this.state.users.length && <UserList users={this.state.users} /> }
+        { !!users.length && <UserList users={users} /> }
       </div>
     );
   }
@@ -37,10 +35,14 @@ class HomePage extends Component {
 
 const UserList = ({ users }) =>
   <div>
-    <h2>List of App Users (Saved on Sign Up)</h2>
+    <h2>List of App User IDs (Saved on Sign Up in Firebase Database)</h2>
     {users.map(user =>
-      <div key={user.index}>{user.username} ({user.index})</div>
+      <div key={user.index}>{user.index}</div>
     )}
   </div>
 
-export default withAuthorization(true)(HomePage);
+export default compose(
+  withAuthorization(true),
+  inject('userStore'),
+  observer
+)(HomePage);

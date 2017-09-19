@@ -1,20 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
 
 import SignOutButton from '../SignOut';
 
-const Navigation = (props, { authUser }) =>
+const Navigation = ({ sessionStore }) =>
   <div>
-    { authUser
+    { sessionStore.authUser
         ? <NavigationAuth />
         : <NavigationNonAuth />
     }
   </div>
-
-Navigation.contextTypes = {
-  authUser: PropTypes.object,
-};
 
 const NavigationAuth = () =>
   <ul>
@@ -30,4 +27,7 @@ const NavigationNonAuth = () =>
     <li><Link to="/signin">Sign In</Link></li>
   </ul>
 
-export default Navigation;
+export default compose(
+  inject('sessionStore'),
+  observer
+)(Navigation);
