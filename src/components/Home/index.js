@@ -41,8 +41,10 @@ const UserList = ({ users }) =>
     )}
   </div>
 
+const authCondition = (authUser) => !!authUser;
+
 export default compose(
-  withAuthorization(true),
+  withAuthorization(authCondition),
   inject('userStore'),
   observer
 )(HomePage);

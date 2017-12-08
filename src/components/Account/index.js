@@ -13,8 +13,10 @@ const AccountPage = ({ sessionStore }) =>
     <PasswordChangeForm />
   </div>
 
+const authCondition = (authUser) => !!authUser;
+
 export default compose(
-  withAuthorization(true),
+  withAuthorization(authCondition),
   inject('sessionStore'),
   observer
 )(AccountPage);
