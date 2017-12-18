@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx';
 
 class UserStore {
-  @observable users = [];
+  @observable users = {};
 
   constructor(rootStore) {
     this.rootStore = rootStore;
