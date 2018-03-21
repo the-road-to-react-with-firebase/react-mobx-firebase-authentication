@@ -4,19 +4,21 @@ import { compose } from 'recompose';
 
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
-import withAuthorization from '../Session/withAuthorization';
+import AuthorizedComponent from '../Session/AuthorizedComponent';
 
-const AccountPage = ({ sessionStore }) =>
-  <div>
-    <h1>Account: {sessionStore.authUser.email}</h1>
-    <PasswordForgetForm />
-    <PasswordChangeForm />
-  </div>
-
-const authCondition = (authUser) => !!authUser;
+const AccountPage = ({ sessionStore }) => (
+  <AuthorizedComponent
+    render={() => (
+      <div>
+        <h1>Account: {sessionStore.authUser.email}</h1>
+        <PasswordForgetForm />
+        <PasswordChangeForm />
+      </div>
+    )}
+  />
+);
 
 export default compose(
-  withAuthorization(authCondition),
   inject('sessionStore'),
   observer
 )(AccountPage);

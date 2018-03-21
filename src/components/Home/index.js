@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 
-import withAuthorization from '../Session/withAuthorization';
+import AuthorizedComponent from '../Session/AuthorizedComponent';
 import { db } from '../../firebase';
 
 class HomePage extends Component {
@@ -18,12 +18,16 @@ class HomePage extends Component {
     const { users } = this.props.userStore;
 
     return (
-      <div>
-        <h1>Home</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
+      <AuthorizedComponent
+        render={() => (
+          <div>
+            <h1>Home</h1>
+            <p>The Home Page is accessible by every signed in user.</p>
 
-        { !!users && <UserList users={users} /> }
-      </div>
+            { !!users && <UserList users={users} /> }
+          </div>
+        )}
+      />
     );
   }
 }
@@ -38,10 +42,9 @@ const UserList = ({ users }) =>
     )}
   </div>
 
-const authCondition = (authUser) => !!authUser;
+// const authCondition = (authUser) => !!authUser;
 
 export default compose(
-  withAuthorization(authCondition),
   inject('userStore'),
   observer
 )(HomePage);
