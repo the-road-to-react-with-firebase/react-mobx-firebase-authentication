@@ -1,9 +1,9 @@
-import { useStrict } from 'mobx';
+import { configure } from 'mobx';
 
 import SessionStore from './sessionStore';
 import UserStore from './userStore';
 
-useStrict(true);
+configure({ enforceActions: true });
 
 class RootStore {
   constructor() {
