@@ -17,7 +17,7 @@ const withAuthorization = (condition) => (Component) => {
     }
 
     render() {
-      return this.props.sessionStore.authUser ? <Component /> : null;
+      return this.props.sessionStore.authUser ? <Component {...this.props} /> : null;
     }
   }
 
