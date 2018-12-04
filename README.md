@@ -1,9 +1,10 @@
-# react-firebase-authentication
+# react-mobx-firebase-authentication
 
-[![Build Status](https://travis-ci.org/the-road-to-react-with-firebase/react-firebase-authentication.svg?branch=master)](https://travis-ci.org/the-road-to-react-with-firebase/react-firebase-authentication) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/the-road-to-react-with-firebase/react-firebase-authentication.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/the-road-to-react-with-firebase/react-mobx-firebase-authentication.svg?branch=master)](https://travis-ci.org/the-road-to-react-with-firebase/react-mobx-firebase-authentication) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/the-road-to-react-with-firebase/react-mobx-firebase-authentication.svg)](https://greenkeeper.io/)
 
-* [Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
-* [Live Version of half of the Tutorial](https://react-firebase-authentication.wieruch.com/)
+* [React + Firebase Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
+* [React + Firebase + Redux Tutorial](https://www.robinwieruch.de/react-firebase-mobx-tutorial)
+* [Live Version of half of the Tutorial](https://react-mobx-firebase-authentication.wieruch.com/)
 
 ## Features
 
@@ -11,9 +12,7 @@
   * only React (create-react-app)
   * firebase 5
   * react-router 4
-  * no Redux/MobX
-    * [Redux Version](https://github.com/taming-the-state-in-react/react-redux-firebase-authentication)
-    * [MobX Version](https://github.com/taming-the-state-in-react/react-mobx-firebase-authentication)
+  * **mobx**
 * features:
   * Sign In
   * Sign Up
@@ -30,8 +29,8 @@
 
 ## Installation
 
-* `git clone git@github.com:the-road-to-react-with-firebase/react-firebase-authentication.git`
-* `cd react-firebase-authentication`
+* `git clone git@github.com:the-road-to-react-with-firebase/react-mobx-firebase-authentication.git`
+* `cd react-mobx-firebase-authentication`
 * `npm install`
 * `npm start`
 * visit http://localhost:3000/
