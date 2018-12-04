@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 
-import {
-  AuthUserContext,
-  withAuthorization,
-  withEmailVerification,
-} from '../Session';
+import { withAuthorization, withEmailVerification } from '../Session';
 import { withFirebase } from '../Firebase';
 
 class HomePage extends Component {
@@ -132,45 +129,44 @@ class MessagesBase extends Component {
     const { text, messages, loading } = this.state;
 
     return (
-      <AuthUserContext.Consumer>
-        {authUser => (
-          <div>
-            {!loading && messages && (
-              <button type="button" onClick={this.onNextPage}>
-                More
-              </button>
-            )}
-
-            {loading && usersLoading && <div>Loading ...</div>}
-
-            {users && messages && (
-              <MessageList
-                messages={messages.map(message => ({
-                  ...message,
-                  user: users[message.userId],
-                }))}
-                onEditMessage={this.onEditMessage}
-                onRemoveMessage={this.onRemoveMessage}
-              />
-            )}
-
-            {!messages && <div>There are no messages ...</div>}
-
-            <form
-              onSubmit={event =>
-                this.onCreateMessage(event, authUser)
-              }
-            >
-              <input
-                type="text"
-                value={text}
-                onChange={this.onChangeText}
-              />
-              <button type="submit">Send</button>
-            </form>
-          </div>
+      <div>
+        {!loading && messages && (
+          <button type="button" onClick={this.onNextPage}>
+            More
+          </button>
         )}
-      </AuthUserContext.Consumer>
+
+        {loading && usersLoading && <div>Loading ...</div>}
+
+        {users && messages && (
+          <MessageList
+            messages={messages.map(message => ({
+              ...message,
+              user: users[message.userId],
+            }))}
+            onEditMessage={this.onEditMessage}
+            onRemoveMessage={this.onRemoveMessage}
+          />
+        )}
+
+        {!messages && <div>There are no messages ...</div>}
+
+        <form
+          onSubmit={event =>
+            this.onCreateMessage(
+              event,
+              this.props.sessionStore.authUser,
+            )
+          }
+        >
+          <input
+            type="text"
+            value={text}
+            onChange={this.onChangeText}
+          />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     );
   }
 }
@@ -266,6 +262,8 @@ const condition = authUser => !!authUser;
 
 export default compose(
   withFirebase,
+  inject('sessionStore'),
+  observer,
   withEmailVerification,
   withAuthorization(condition),
 )(HomePage);

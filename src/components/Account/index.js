@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 
-import {
-  AuthUserContext,
-  withAuthorization,
-  withEmailVerification,
-} from '../Session';
+import { withAuthorization, withEmailVerification } from '../Session';
 import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
@@ -29,17 +26,13 @@ const SIGN_IN_METHODS = [
   },
 ];
 
-const AccountPage = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div>
-        <h1>Account: {authUser.email}</h1>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
-        <LoginManagement authUser={authUser} />
-      </div>
-    )}
-  </AuthUserContext.Consumer>
+const AccountPage = ({ sessionStore }) => (
+  <div>
+    <h1>Account: {sessionStore.authUser.email}</h1>
+    <PasswordForgetForm />
+    <PasswordChangeForm />
+    <LoginManagement authUser={sessionStore.authUser} />
+  </div>
 );
 
 class LoginManagementBase extends Component {
@@ -226,6 +219,8 @@ const LoginManagement = withFirebase(LoginManagementBase);
 const condition = authUser => !!authUser;
 
 export default compose(
+  inject('sessionStore'),
+  observer,
   withEmailVerification,
   withAuthorization(condition),
 )(AccountPage);
