@@ -14,7 +14,12 @@ class UserItem extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.user) {
+    if (
+      !(
+        this.props.userStore.users &&
+        this.props.userStore.users[this.props.match.params.id]
+      )
+    ) {
       this.setState({ loading: true });
     }
 
@@ -35,7 +40,9 @@ class UserItem extends Component {
   }
 
   onSendPasswordResetEmail = () => {
-    this.props.firebase.doPasswordReset(this.props.user.email);
+    this.props.firebase.doPasswordReset(
+      this.props.userStore.users[this.props.match.params.id].email,
+    );
   };
 
   render() {
