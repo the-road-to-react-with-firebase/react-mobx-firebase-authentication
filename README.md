@@ -4,7 +4,7 @@
 
 * [React + Firebase Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
 * [React + Firebase + MobX Tutorial](https://www.robinwieruch.de/react-firebase-mobx-tutorial)
-* [Live Version of half of the Tutorial](https://react-mobx-firebase-authentication.wieruch.com/)
+* [Live Version of half of the Tutorial](https://react-firebase-authentication.wieruch.com/)
 
 ## Features
 
