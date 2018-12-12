@@ -6,12 +6,20 @@
 * [React + Firebase + MobX Tutorial](https://www.robinwieruch.de/react-firebase-mobx-tutorial)
 * [Live Version of half of the Tutorial](https://react-firebase-authentication.wieruch.com/)
 
+## Variations
+
+* [Only React Version](https://github.com/the-road-to-react-with-firebase/react-firebase-authentication)
+* [Redux Version](https://github.com/the-road-to-react-with-firebase/react-redux-firebase-authentication)
+* [Gatsby Version](https://github.com/the-road-to-react-with-firebase/react-gatsby-firebase-authentication)
+* [Firestore Version](https://github.com/the-road-to-react-with-firebase/react-firestore-authentication)
+* [Semantic UI Version](https://github.com/the-road-to-react-with-firebase/react-semantic-ui-firebase-authentication)
+
 ## Features
 
 * uses:
   * only React (create-react-app)
-  * firebase 5
-  * react-router 4
+  * firebase
+  * react-router
   * **mobx**
 * features:
   * Sign In
